@@ -1,0 +1,171 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Лавка</title>
+
+    <!-- Main Style -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="site">
+
+    <div class="site_wrap">
+
+        <!-- Header -->
+        {% include 'include/head.html' %}
+        <!-- /Header -->
+
+        <!-- Main content -->
+        <main class="site_main">
+
+            <!-- Intro -->
+            <section class="sec-intro">
+                <div class="container container--md">
+                    <div class="sec-intro_inner">
+                        <div class="sec-intro_left">
+                            <div class="sec-intro_title">
+                                Аккаунты
+                                Facebook
+                            </div>
+                            <div class="sec-intro_description">
+                                Вообще я принципиально не хотел писать тз, что бы у каждого была свобода действий,
+                                что в дизайне, что в текстах, что в структуре сайта,
+                                потому что я думаю что стандартный принцип работы магазина и его структура понятна всем,
+                                и если накидаю ее макет, то вы там не увидите ничего нового или экспериментального
+                            </div>
+                        </div>
+                        <div class="sec-intro_right sec-intro_right--border">
+                            <div class="offers">
+                                {% for category in categories %}
+                                <div class="offers_block">
+                                    <div class="offers_title">
+                                        {{category.category}}
+                                    </div>
+                                    <div class="offers_list">
+                                        {% for product in products %}
+                                            {% if product.category == category %}
+                                        <div class="offers_item no-bg">
+                                            <div class="offers_item__inner">
+                                                <div class="offers_item__icon">
+                                                    <i class="icon-offers-fb"></i>
+                                                </div>
+                                                <div class="offers_item__title">
+                                                    {{ product.name }}
+                                                </div>
+                                                <div class="offers_item__action">
+                                                    <a role="button" class="btn btn--blue modal-link" data-modal="{{product.modal}}">
+                                                        Купить
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /Intro -->
+
+        </main>
+        <!-- /Main content -->
+    </div>
+
+    {% for category in categories %}
+    {% for product in products %}
+        {% if product.category == category %}
+    <div class="modal modal-order" id="{{ product.modal }}">
+        <div class="modal_inner">
+            <a role="button" class="modal_close">
+                <i class="icon-close"></i>
+            </a>
+            <div class="modal_content">
+                <div class="modal_steps">
+                    <div class="modal_steps__title">
+                        Шаг <span class="modal_steps__number"></span>
+                    </div>
+                    <div class="modal_steps__items">
+                        <i class="modal_steps__items-value" data-order-step="1"></i>
+                        <i class="modal_steps__items-value" data-order-step="2"></i>
+                        <i class="modal_steps__items-value" data-order-step="3"></i>
+                    </div>
+                </div>
+                <div class="modal_order order">
+                    <div class="order-product order-step" data-order-step="1">
+                        <div class="order-product_inner">
+                            <div class="order-product_left order-product_left--border">
+                                <div class="order-product_info">
+                                    <div class="order-product_title">
+                                        {{ product.name }}
+                                    </div>
+                                    <div class="order-product_description">
+                                        {{ product.description }}
+                                    </div>
+                                    <div class="order-product_value">
+                                        <div class="order-product_value__quantity quantity-block">
+                                            <div class="quantity-block_list">
+                                                <div class="quantity-block_item">
+                                                    <div class="quantity-block_item__title">
+                                                        Штук
+                                                    </div>
+                                                    <div class="quantity-block_item__info">
+                                                        <a role="button" class="quantity-block_item__arrow quantity-sub"></a>
+                                                        <input type="text" class="quantity-block_item__field quantity-field" value="12" disabled>
+                                                        <a role="button" class="quantity-block_item__arrow quantity-add"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="quantity-block_item">
+                                                    <div class="quantity-block_item__title">
+                                                        Акк-ов
+                                                    </div>
+                                                    <div class="quantity-block_item__subtitle">
+                                                        (в рекл. кабинете*)
+                                                    </div>
+                                                    <div class="quantity-block_item__info">
+                                                        <a role="button" class="quantity-block_item__arrow quantity-sub"></a>
+                                                            <input type="text" class="quantity-block_item__field quantity-field" value="12" disabled>
+                                                        <a role="button" class="quantity-block_item__arrow quantity-add"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="order-product_price">
+                                        <div class="order-product_price__title">
+                                            Цена:
+                                        </div>
+
+                                        <div class="order-product_price__value">
+                                            {{ product.price }}
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="order-product_action">
+                                    <button class="order-product_btn btn btn--blue btn--card">Купить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% include 'buy/data_buy.html' %}
+                    {% include 'buy/succes.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+        {% endif %}
+    {% endfor %}
+    {% endfor %}
+
+
+    <!-- Scripts -->
+    <script src="{% static 'js/script.min.js' %}"></script>
+</body>
+</html>

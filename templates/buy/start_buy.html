@@ -1,0 +1,60 @@
+{% load static %}
+<div class="order-product order-step" data-order-step="1">
+                        <div class="order-product_inner">
+                            <div class="order-product_left order-product_left--border">
+                                <div class="order-product_info">
+                                    <div class="order-product_title">
+                                        {{product.name}}
+                                    </div>
+                                    <div class="order-product_description">
+                                        Вообще я принципиально не хотел писать тз, что бы у каждого была свобода действий,
+                                        что в дизайне, что в текстах, что в структуре сайта,
+                                        потому что я думаю что стандартный принцип работы магазина и его структура понятна всем,
+                                        и если накидаю ее макет, то вы там не увидите ничего нового или экспериментального
+                                    </div>
+                                    <div class="order-product_value">
+                                        <div class="order-product_value__quantity quantity-block">
+                                            <div class="quantity-block_list">
+                                                <div class="quantity-block_item">
+                                                    <div class="quantity-block_item__title">
+                                                        Штук
+                                                    </div>
+                                                    <div class="quantity-block_item__info">
+                                                        <a role="button" class="quantity-block_item__arrow quantity-sub"></a>
+                                                        <input type="text" class="quantity-block_item__field quantity-field" value="12" disabled>
+                                                        <a role="button" class="quantity-block_item__arrow quantity-add"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="quantity-block_item">
+                                                    <div class="quantity-block_item__title">
+                                                        Акк-ов
+                                                    </div>
+                                                    <div class="quantity-block_item__subtitle">
+                                                        (в рекл. кабинете*)
+                                                    </div>
+                                                    <div class="quantity-block_item__info">
+                                                        <a role="button" class="quantity-block_item__arrow quantity-sub"></a>
+                                                        <input type="text" class="quantity-block_item__field quantity-field" value="12" disabled>
+                                                        <a role="button" class="quantity-block_item__arrow quantity-add"></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="order-product_price">
+                                        <div class="order-product_price__title">
+                                            Цена:
+                                        </div>
+
+                                        <div class="order-product_price__value">
+                                            {{ product.price }}
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="order-product_action">
+                                    <button class="order-product_btn btn btn--blue btn--card">Купить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
